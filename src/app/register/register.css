@@ -1,0 +1,176 @@
+
+:host {
+  display: block;
+  min-height: 100vh;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: black;
+}
+
+main {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: black;
+  transition: 0.4s;
+}
+
+main.light-mode {
+  background: white;
+}
+
+main.light-mode .recuadro::after {
+  background: rgba(15,15,15,0.95);
+}
+
+main.light-mode .recuadro h1,
+main.light-mode .recuadro p {
+  color: white;
+}
+
+main.light-mode .form-control,
+main.light-mode .form-control::placeholder,
+main.light-mode .input-group-text {
+  background: #222;
+  color: white;
+  border-color: #555;
+}
+
+main.light-mode .boton-login button {
+  color: black;
+}
+
+main.light-mode .boton-login button::after {
+  background: white;
+}
+
+.recuadro {
+  position: relative;
+  width: 100%;
+  max-width: 700px;
+  padding: 24px;
+  text-align: center;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(5px);
+  box-shadow: 0 0 50px rgba(25, 29, 48, 0.3);
+  overflow: hidden;
+  z-index: 1;
+}
+
+.recuadro::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 22px;
+  background: linear-gradient(
+    45deg,
+    #BD0404,
+    #ED9B1C,
+    #09BD08,
+    #BD0404
+  );
+  background-size: 400%;
+  z-index: -2;
+  animation: borderAnimation 8s linear infinite;
+}
+
+.recuadro::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  background: rgba(255,255,255,0.9);
+  border-radius: 18px;
+  z-index: -1;
+}
+
+@keyframes borderAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.boton-login button {
+  position: relative;
+  overflow: hidden;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 10px;
+  z-index: 1;
+  background: #111;
+  transition: 0.3s;
+}
+
+.boton-login button::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(
+    45deg,
+    #BD0404,
+    #ED9B1C,
+    #09BD08,
+    #BD0404
+  );
+  background-size: 400%;
+  z-index: -1;
+  animation: borderAnimation 6s linear infinite;
+}
+
+.boton-login button::after {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  background: #111;
+  border-radius: 8px;
+  z-index: -1;
+}
+
+.boton-login button:hover {
+  transform: scale(1.05);
+}
+
+#boton-cambio{
+  margin-left: 1200px;
+}
+
+.formulario-crear{
+  display: grid;
+  grid-template-columns: repeat(2, minmax(220px, 1fr));
+  gap: 14px 16px;
+  width: 100%;
+  max-width: 760px;
+  background: #f7f9fb;
+  border: 1px solid #dce3ea;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 16px;
+  margin-bottom: 32px;
+}
+
+.fila-formulario{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.acciones-formulario{
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+

@@ -1,0 +1,70 @@
+<main class="main"  [class.light-mode]="!darkMode">
+
+  <nav class="navbar fixed-top bg-dark border-bottom border-body" data-bs-theme="dark">
+    <div class="container-fluid">
+      <a class="navbar-brand">Nombre de la pagina</a>
+      <button id="boton-cambio"
+              type="button"
+              class="btn btn-outline-light"
+              (click)="toggleTheme()">
+        <i class="fa-solid fa-moon"></i>
+      </button>
+      <button type="button" class="btn-close" routerLink="/login" aria-label="Close"></button>
+    </div>
+
+  </nav>
+
+  <div class="recuadro">
+    <h1> Registro de Usuario </h1>
+
+    <form class="formulario-crear">
+      <div class="fila-formulario">
+        <h3>Cedula</h3>
+        <input name="cedula" type="number" min="1000000000" class="form-control"/>
+      </div>
+
+      <div class="fila-formulario">
+        <h3>Nombre</h3>
+        <input name="nombre" type="text" class="form-control"/>
+      </div>
+
+      <div class="fila-formulario">
+        <h3>Email</h3>
+        <input name="email" type="email" class="form-control"/>
+      </div>
+
+      <div class="fila-formulario">
+        <h3>Telefono</h3>
+        <input name="telefono" type="number" min="1" class="form-control"/>
+      </div>
+
+      <div class="fila-formulario">
+        <h3>Edad</h3>
+        <input name="edad" type="number" min="1" class="form-control"/>
+      </div>
+
+      <div class="fila-formulario">
+        <h3>Direccion</h3>
+        <input name="direccion" type="text" class="form-control"/>
+      </div>
+
+      <div class="fila-formulario">
+        <h3>Contraseña</h3>
+        <input name="contrasena" type="password" class="form-control"/>
+      </div>
+
+      <div class="acciones-formulario">
+        <button  type="button" class="btn btn-success">Registrar Usuario
+        </button>
+        <button type="button" class="btn btn-outline-secondary" >Limpiar</button>
+      </div>
+    </form>
+
+    <div class="boton-registro">
+      <button type="button" class="btn btn-outline-info">Registrarse</button>
+    </div>
+    <p>¿Ya tiene una cuenta? <a routerLink="/login"> Iniciar Sesión</a></p>
+  </div>
+
+
+</main>
