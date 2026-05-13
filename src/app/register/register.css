@@ -11,6 +11,8 @@ main {
   width: 100%;
   min-height: 100vh;
   display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   background: black;
@@ -58,6 +60,8 @@ main.light-mode .boton-login button::after {
   box-shadow: 0 0 50px rgba(25, 29, 48, 0.3);
   overflow: hidden;
   z-index: 1;
+  margin-top: 16px;
+  margin-bottom: 16px;
 }
 
 .recuadro::before {
@@ -84,20 +88,6 @@ main.light-mode .boton-login button::after {
   background: rgba(255,255,255,0.9);
   border-radius: 18px;
   z-index: -1;
-}
-
-@keyframes borderAnimation {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
 }
 
 .boton-login button {
@@ -141,13 +131,22 @@ main.light-mode .boton-login button::after {
   transform: scale(1.05);
 }
 
-#boton-cambio{
-  margin-left: 1200px;
+.boton-color{
+  margin-left: 12px;
+}
+
+.boton-admin{
+  border: none;
+  color: white;
+  border-radius: 10px;
+  padding: 8px 20px;
+  z-index: 1;
+  background: #111;
 }
 
 .formulario-crear{
   display: grid;
-  grid-template-columns: repeat(2, minmax(220px, 1fr));
+  grid-template-columns: repeat(1, minmax(220px, 1fr));
   gap: 14px 16px;
   width: 100%;
   max-width: 760px;
@@ -173,4 +172,6 @@ main.light-mode .boton-login button::after {
   margin-top: 6px;
 }
 
-
+nav {
+  min-width: 100%;
+}
