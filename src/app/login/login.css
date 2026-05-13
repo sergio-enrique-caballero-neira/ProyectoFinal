@@ -13,12 +13,12 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: black;
+  background: #ffffff;
   transition: 0.4s;
 }
 
 main.light-mode {
-  background: white;
+  background: #303030;
 }
 
 main.light-mode .recuadro::after {
@@ -39,11 +39,11 @@ main.light-mode .input-group-text {
 }
 
 main.light-mode .boton-login button {
-  color: black;
+  color: #fffdfd;
 }
 
 main.light-mode .boton-login button::after {
-  background: white;
+  background: #323131;
 }
 
 .recuadro {
