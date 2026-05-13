@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, inject } from '@angular/core';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthService } from '../services/auth-service';
 import { Darktheme } from '../services/darktheme';
 

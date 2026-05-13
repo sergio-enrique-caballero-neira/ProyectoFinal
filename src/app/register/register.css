@@ -1,51 +1,94 @@
-
-:host {
-  display: block;
-  min-height: 100vh;
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background: black;
-}
-
 main {
   position: relative;
   width: 100%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  background: black;
   transition: 0.4s;
+  background: linear-gradient(180deg, #07111f 0%, #0d1728 100%);
+  color: #edf4ff;
 }
 
 main.light-mode {
-  background: white;
+  background: linear-gradient(180deg, #f5f8fc 0%, #e9f0f7 100%);
+  color: #142033;
 }
 
-main.light-mode .recuadro::after {
-  background: rgba(15,15,15,0.95);
+.navbar {
+  backdrop-filter: blur(14px);
+  background: rgba(7, 17, 31, 0.85);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  padding: 0 20px;
+  height: 56px;
+  transition: background 0.4s, border-color 0.4s;
 }
 
-main.light-mode .recuadro h1,
-main.light-mode .recuadro p {
-  color: white;
+.navbar .navbar-brand {
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.02em;
+  background: linear-gradient(90deg, #5b8cff, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-main.light-mode .form-control,
-main.light-mode .form-control::placeholder,
-main.light-mode .input-group-text {
-  background: #222;
-  color: white;
-  border-color: #555;
+.navbar .btn {
+  height: 38px;
+  min-width: 38px;
+  padding: 0 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  color: #edf4ff;
+  border-color: #2d3c57;
+  background: transparent;
+  transition: background 0.2s, color 0.2s;
 }
 
-main.light-mode .boton-login button {
-  color: black;
+.navbar .btn + .btn {
+  margin-left: 10px;
 }
 
-main.light-mode .boton-login button::after {
-  background: white;
+.navbar .btn:hover {
+  background: rgba(91, 140, 255, 0.12);
+}
+
+.navbar .boton-admin {
+  color: #22c55e;
+  border-color: #22c55e;
+}
+
+.navbar .boton-admin:hover {
+  color: #ffffff;
+  background: #22c55e;
+  border-color: #22c55e;
+}
+
+.navbar-light-mode {
+  background: rgba(240, 245, 255, 0.92);
+  border-bottom: 1px solid rgba(20, 32, 51, 0.12);
+  box-shadow: 0 24px 36px rgba(0, 0, 0, 0.15 );
+}
+
+.navbar-light-mode .navbar-brand {
+  background: linear-gradient(90deg, #3a6fd8, #6d3fc9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.navbar-light-mode .boton-color {
+  color: #142033;
+  border-color: #a0b4cc;
+}
+
+.navbar-light-mode .boton-admin {
+  color: #16a34a;
+  border-color: #16a34a;
 }
 
 .recuadro {
@@ -55,13 +98,20 @@ main.light-mode .boton-login button::after {
   padding: 24px;
   text-align: center;
   border-radius: 20px;
-  background: rgba(255,255,255,0.85);
-  backdrop-filter: blur(5px);
-  box-shadow: 0 0 50px rgba(25, 29, 48, 0.3);
+  background: rgba(8, 15, 28, 0.84);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 24px 70px rgba(6, 11, 22, 0.5);
   overflow: hidden;
   z-index: 1;
-  margin-top: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  margin-top: 75px;
   margin-bottom: 16px;
+}
+
+main.light-mode .recuadro {
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 24px 70px rgba(73, 97, 132, 0.18);
+  border-color: rgba(20, 32, 51, 0.12);
 }
 
 .recuadro::before {
@@ -69,13 +119,7 @@ main.light-mode .boton-login button::after {
   position: absolute;
   inset: -3px;
   border-radius: 22px;
-  background: linear-gradient(
-    45deg,
-    #BD0404,
-    #ED9B1C,
-    #09BD08,
-    #BD0404
-  );
+  background: linear-gradient(45deg, #5b8cff, #8b5cf6, #22c55e, #5b8cff);
   background-size: 400%;
   z-index: -2;
   animation: borderAnimation 8s linear infinite;
@@ -85,86 +129,74 @@ main.light-mode .boton-login button::after {
   content: "";
   position: absolute;
   inset: 4px;
-  background: rgba(255,255,255,0.9);
+  background: rgba(13, 21, 37, 0.94);
   border-radius: 18px;
   z-index: -1;
 }
 
-.boton-login button {
-  position: relative;
-  overflow: hidden;
-  border: none;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 10px;
-  z-index: 1;
-  background: #111;
-  transition: 0.3s;
+main.light-mode .recuadro::after {
+  background: rgba(255, 255, 255, 0.94);
 }
 
-.boton-login button::before {
-  content: "";
-  position: absolute;
-  inset: -2px;
-  background: linear-gradient(
-    45deg,
-    #BD0404,
-    #ED9B1C,
-    #09BD08,
-    #BD0404
-  );
-  background-size: 400%;
-  z-index: -1;
-  animation: borderAnimation 6s linear infinite;
-}
-
-.boton-login button::after {
-  content: "";
-  position: absolute;
-  inset: 2px;
-  background: #111;
-  border-radius: 8px;
-  z-index: -1;
-}
-
-.boton-login button:hover {
-  transform: scale(1.05);
-}
-
-.boton-color{
-  margin-left: 12px;
-}
-
-.boton-admin{
-  border: none;
-  color: white;
-  border-radius: 10px;
-  padding: 8px 20px;
-  z-index: 1;
-  background: #111;
-}
-
-.formulario-crear{
+.formulario-crear {
   display: grid;
-  grid-template-columns: repeat(1, minmax(220px, 1fr));
+  grid-template-columns: 1fr;
   gap: 14px 16px;
   width: 100%;
-  max-width: 760px;
-  background: #f7f9fb;
-  border: 1px solid #dce3ea;
-  border-radius: 8px;
+  background: rgba(14, 22, 39, 0.9);
+  border: 1px solid #2d3c57;
+  border-radius: 16px;
   padding: 20px;
   margin-top: 16px;
-  margin-bottom: 32px;
+  margin-bottom: 24px;
+  box-shadow: 0 18px 42px rgba(12, 18, 31, 0.16);
 }
 
-.fila-formulario{
+main.light-mode .formulario-crear {
+  background: rgba(255, 255, 255, 0.96);
+  border-color: #c7d3e1;
+  box-shadow: 0 18px 42px rgba(73, 97, 132, 0.16);
+}
+
+.fila-formulario {
   display: flex;
   flex-direction: column;
   gap: 6px;
+  text-align: left;
 }
 
-.acciones-formulario{
+.fila-formulario h3 {
+  font-size: 1rem;
+  margin: 0;
+}
+
+.form-control {
+  background: rgba(17, 26, 44, 0.95);
+  color: #f5f8ff;
+  border-color: #2d3c57;
+}
+
+main.light-mode .form-control {
+  background: rgba(255, 255, 255, 0.98);
+  color: #142033;
+  border-color: #c7d3e1;
+}
+
+.form-control:focus {
+  color: #f5f8ff;
+  background: rgba(17, 26, 44, 0.95);
+  border-color: #5b8cff;
+  box-shadow: 0 0 0 0.2rem rgba(91, 140, 255, 0.18);
+}
+
+main.light-mode .form-control:focus {
+  color: #142033;
+  background: rgba(255, 255, 255, 0.98);
+  border-color: #4f8cff;
+  box-shadow: 0 0 0 0.2rem rgba(91, 140, 255, 0.18);
+}
+
+.acciones-formulario {
   grid-column: 1 / -1;
   display: flex;
   flex-wrap: wrap;
@@ -173,6 +205,81 @@ main.light-mode .boton-login button::after {
   justify-content: center;
 }
 
-nav {
-  min-width: 100%;
+.acciones-formulario .btn {
+  min-height: 40px;
+  padding: 10px 18px;
+  border-radius: 10px;
+}
+
+.acciones-formulario .btn-success {
+  background: linear-gradient(135deg, #5b8cff, #8b5cf6);
+  border-color: transparent;
+  color: #ffffff;
+}
+
+.acciones-formulario .btn-success:hover {
+  filter: brightness(1.06);
+}
+
+.acciones-formulario .btn-limpiar {
+  color: #edf4ff;
+  border-color: #2d3c57;
+  background: transparent;
+}
+
+main.light-mode .acciones-formulario .btn-limpiar {
+  color: #142033;
+  border-color: #c7d3e1;
+}
+
+.acciones-formulario .btn-limpiar:hover {
+  background: rgba(91, 140, 255, 0.12);
+}
+
+.mi-enlace {
+  color: #5b8cff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.mi-enlace:hover {
+  color: #8b5cf6;
+}
+
+.recuadro-error {
+  margin-top: 10px;
+  color: #ffb4b4;
+  background: rgba(255, 99, 99, 0.12);
+  border: 1px solid rgba(255, 99, 99, 0.25);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 0.95rem;
+}
+
+main.light-mode .recuadro-error {
+  color: #c0392b;
+  background: rgba(255, 99, 99, 0.10);
+  border: 1px solid rgba(255, 99, 99, 0.30);
+}
+
+.recuadro-exito {
+  margin-top: 10px;
+  color: #86efac;
+  background: rgba(34, 197, 94, 0.12);
+  border: 1px solid rgba(34, 197, 94, 0.25);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 0.95rem;
+}
+
+main.light-mode .recuadro-exito {
+  color: #15803d;
+  background: rgba(34, 197, 94, 0.10);
+  border: 1px solid rgba(34, 197, 94, 0.30);
+}
+
+@keyframes borderAnimation {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }

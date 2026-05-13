@@ -1,11 +1,11 @@
-<main class="main"  [class.light-mode]="!darkMode">
+<main class="main" [class.light-mode]="!darkMode">
 
-  <nav class="navbar bg-dark border-bottom border-body" data-bs-theme="dark">
+  <nav class="navbar fixed-top" [class.navbar-light-mode]="!darkMode">
     <div class="container-fluid">
       <a class="navbar-brand">Nombre de la pagina</a>
       <div>
-        <button type="button" routerLink="/admin-login" class="btn btn-outline-success boton-admin">Admin</button>
-        <button id="boton-cambio" type="button" class="btn btn-outline-light boton-color" (click)="toggleTheme()">
+        <button type="button" routerLink="/admin-login" class="btn boton-admin">Admin</button>
+        <button type="button" class="btn boton-color" (click)="toggleTheme()">
           <i [class]="darkMode ? 'fa-solid fa-moon' : 'fa-solid fa-sun'"></i>
         </button>
       </div>
@@ -13,38 +13,41 @@
   </nav>
 
   <div class="recuadro">
-    <h1> Registro de UsuarioModel </h1>
+    <h1>Registro de Usuario</h1>
 
     <form class="formulario-crear">
       <div class="fila-formulario">
-        <h3>Nombre</h3>
-        <input [(ngModel)]="nombre" name="nombre" type="text" class="form-control"/>
+        <h3>Username</h3>
+        <input [(ngModel)]="nombre" name="nombre" type="text" class="form-control" />
       </div>
 
       <div class="fila-formulario">
         <h3>Contraseña</h3>
-        <input [(ngModel)]="contrasena" name="contrasena" type="password" class="form-control"/>
+        <input [(ngModel)]="contrasena" name="contrasena" type="password" class="form-control" />
       </div>
 
       <div class="fila-formulario">
         <h3>Email</h3>
-        <input [(ngModel)]="email" name="email" type="email" class="form-control"/>
+        <input [(ngModel)]="email" name="email" type="email" class="form-control" />
       </div>
 
       <div class="fila-formulario">
-        <h3>Telefono</h3>
-        <input [(ngModel)]="telefono" name="telefono" type="number" min="1" class="form-control"/>
+        <h3>Teléfono</h3>
+        <input [(ngModel)]="telefono" name="telefono" type="number" min="1" class="form-control" />
       </div>
 
       <div class="acciones-formulario">
-        <button (click)="register()" type="button" class="btn btn-success" [disabled]="registrando">{{ registrando ? 'Registrando...' : 'Registrarse' }}</button>
-        <button (click)="limpiar()" type="button" class="btn btn-outline-secondary" >Limpiar</button>
+        <button (click)="register()" type="button" class="btn btn-success" [disabled]="registrando">
+          {{ registrando ? 'Registrando...' : 'Registrarse' }}
+        </button>
+        <button (click)="limpiar()" type="button" class="btn btn-limpiar">Limpiar</button>
       </div>
-      {{mensajeError}}
-      {{mensajeExito}}
-    </form>
-    <p>¿Ya tiene una cuenta? <a routerLink="/login"> Iniciar Sesión</a></p>
-  </div>
 
+      <div class="recuadro-error" *ngIf="mensajeError">{{ mensajeError }}</div>
+      <div class="recuadro-exito" *ngIf="mensajeExito">{{ mensajeExito }}</div>
+    </form>
+
+    <p>¿Ya tiene una cuenta? <a routerLink="/login" class="mi-enlace">Iniciar Sesión</a></p>
+  </div>
 
 </main>

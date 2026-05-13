@@ -1,11 +1,11 @@
 <main class="main" [class.light-mode]="!darkMode">
 
-  <nav class="navbar fixed-top bg-dark border-bottom border-body" data-bs-theme="dark">
+  <nav class="navbar fixed-top" [class.navbar-light-mode]="!darkMode">
     <div class="container-fluid">
       <a class="navbar-brand">Nombre de la pagina</a>
       <div>
-        <button type="button" routerLink="/admin-login" class="btn btn-outline-success boton-admin">Admin</button>
-        <button id="boton-cambio" type="button" class="btn btn-outline-light boton-color" (click)="toggleTheme()">
+        <button type="button" routerLink="/admin-login" class="btn boton-admin">Admin</button>
+        <button id="boton-cambio" type="button" class="btn boton-color" (click)="toggleTheme()">
           <i [class]="darkMode ? 'fa-solid fa-moon' : 'fa-solid fa-sun'"></i>
         </button>
       </div>
@@ -17,7 +17,7 @@
     <form class="datos">
       <div class="input-group mb-3">
         <span class="input-group-text" id="usuario"><i class="fa-solid fa-circle-user"></i></span>
-        <input [(ngModel)]="usuario" name="usuario" type="text" class="form-control" placeholder="UsuarioModel"
+        <input [(ngModel)]="usuario" name="usuario" type="text" class="form-control" placeholder="Username"
                aria-label="usuario" aria-describedby="usuario" required>
       </div>
       <div class="input-group mb-3">
@@ -26,7 +26,7 @@
                aria-label="contrasena" aria-describedby="contrasena" required>
       </div>
     </form>
-    <div class="boton-login">
+    <div class="boton-login div-error">
       <button (click)="login()" type="button" class="btn btn-outline-success">Iniciar Sesion</button>
       <div class="recuadro-error" *ngIf="error">{{ mensajeError }}</div>
     </div>
