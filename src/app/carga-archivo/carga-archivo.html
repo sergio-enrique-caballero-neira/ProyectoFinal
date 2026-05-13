@@ -1,65 +1,58 @@
-<main class="main"  [class.light-mode]="!darkMode">
+<main class="main" [class.light-mode]="!darkMode">
 
   <nav class="navbar fixed-top bg-dark border-bottom border-body" data-bs-theme="dark">
     <div class="container-fluid">
-      <a class="navbar-brand">Nombre de la pagina</a>
-      <button id="boton-cambio"
-              type="button"
-              class="btn btn-outline-light"
-              (click)="toggleTheme()">
-
-        <i class="fa-solid fa-moon"></i>
-
-      </button>
+      <a class="navbar-brand">Nombre de la pagina {{ usuario }}</a>
+      <div>
+        <button type="button" class="btn btn-outline-light boton-salir" (click)="logout()">
+          <i class="fa-regular fa-circle-xmark"></i>
+        </button>
+        <button type="button" class="btn btn-outline-light boton-color" (click)="toggleTheme()">
+          <i [class]="darkMode ? 'fa-solid fa-moon' : 'fa-solid fa-sun'"></i>
+        </button>
+      </div>
     </div>
-
   </nav>
 
-<div class="upload-section" id="zonaarchivo">
-  <div
-    class="drop-zone"
-    (dragover)="onDragOver($event)"
-    (dragleave)="onDragLeave($event)"
-    (drop)="onDrop($event)"
-    [class.dragging]="isDragging">
-    <div *ngIf="!selectedFile">
-      <i class="fa-solid fa-cloud-arrow-up"></i>
-      <h2>Arrastra tu archivo aquí</h2>
-      <p>o</p>
-      <label class="upload-btn">
-        Seleccionar archivo
+  <div class="upload-section" id="zonaarchivo">
+    <div
+      class="drop-zone"
+      (dragover)="onDragOver($event)"
+      (dragleave)="onDragLeave($event)"
+      (drop)="onDrop($event)"
+      [class.dragging]="isDragging">
+      <div *ngIf="!selectedFile">
+        <i class="fa-solid fa-cloud-arrow-up"></i>
+        <h2>Arrastra tu archivo aquí</h2>
+        <p>o</p>
+        <label class="upload-btn">
+          Seleccionar archivo </label>
         <input
           type="file"
           hidden
           (change)="onFileSelected($event)">
 
-      </label>
+      </div>
+
+      <div class="botones-acciones">
+        <button class="led-btn">Subir</button>
+        <button class="led-btn">Analizar</button>
+      </div>
+
     </div>
 
-    <div *ngIf="selectedFile">
-      <i class="fa-solid fa-file-shield archivo-icon"></i>
-      <h2>{{ selectedFile.name }}</h2>
-      <p>
-        {{ getFileSize() }}
-      </p>
-      <button class="remove-btn" (click)="removeFile()">Eliminar archivo
-      </button>
+    <div class="botones-acciones">
+      <button class="led-btn">Subir</button>
+      <button class="led-btn">Analizar</button>
     </div>
 
   </div>
-
-  <div class="botones-acciones">
-    <button class="led-btn">Subir</button>
-    <button class="led-btn">Analizar</button>
-  </div>
-
-</div>
   <div>
     <div class="recuadro">
       <h1>Historial</h1>
     </div>
     <div class="recuadroHistorial">
-      <p>h</p>
+
     </div>
   </div>
 

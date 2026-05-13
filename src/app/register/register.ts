@@ -1,5 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { Darktheme } from '../services/darktheme';
+import { UsuarioService } from '../services/usuario-service';
 
 @Component({
   selector: 'app-register',
@@ -9,6 +10,18 @@ import { Darktheme } from '../services/darktheme';
 })
 export class Register {
   private darkTheme = inject(Darktheme);
+  private usuarioService = inject(UsuarioService);
+  private cd = inject(ChangeDetectorRef);
+
+  nombre: string = '';
+  email: string = '';
+  telefono: string = '';
+  contrasena: string = '';
+
+  registrando: boolean = false;
+
+  mensajeError: string = '';
+  mensajeExito: string = '';
   darkMode = true;
 
   ngOnInit() {
@@ -18,5 +31,35 @@ export class Register {
   toggleTheme() {
     this.darkTheme.toggleTheme();
     this.darkMode = this.darkTheme.darkMode;
+  }
+
+  register() {
+    this.registrando = true;
+
+    this.usuarioService
+      .postUsuario(this.nombre, this.email, this.telefono, this.contrasena)
+      .subscribe({
+        next: (res) => {
+          this.registrando = false;
+          this.mensajeExito = 'Usuario registrado exitosamente';
+          this.mensajeError = '';
+          this.cd.detectChanges();
+        },
+        error: (err) => {
+          this.registrando = false;
+          this.mensajeExito = '';
+          this.mensajeError = err.error;
+          this.cd.detectChanges();
+        },
+      });
+
+    this.cd.detectChanges();
+  }
+
+  limpiar() {
+    this.nombre = '';
+    this.email = '';
+    this.telefono = '';
+    this.contrasena = '';
   }
 }

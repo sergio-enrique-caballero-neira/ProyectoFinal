@@ -18,34 +18,31 @@
     <form class="formulario-crear">
       <div class="fila-formulario">
         <h3>Nombre</h3>
-        <input name="nombre" type="text" class="form-control"/>
-      </div>
-
-      <div class="fila-formulario">
-        <h3>Email</h3>
-        <input name="email" type="email" class="form-control"/>
-      </div>
-
-      <div class="fila-formulario">
-        <h3>Telefono</h3>
-        <input name="telefono" type="number" min="1" class="form-control"/>
+        <input [(ngModel)]="nombre" name="nombre" type="text" class="form-control"/>
       </div>
 
       <div class="fila-formulario">
         <h3>Contraseña</h3>
-        <input name="contrasena" type="password" class="form-control"/>
+        <input [(ngModel)]="contrasena" name="contrasena" type="password" class="form-control"/>
+      </div>
+
+      <div class="fila-formulario">
+        <h3>Email</h3>
+        <input [(ngModel)]="email" name="email" type="email" class="form-control"/>
+      </div>
+
+      <div class="fila-formulario">
+        <h3>Telefono</h3>
+        <input [(ngModel)]="telefono" name="telefono" type="number" min="1" class="form-control"/>
       </div>
 
       <div class="acciones-formulario">
-        <button  type="button" class="btn btn-success">Registrar UsuarioModel
-        </button>
-        <button type="button" class="btn btn-outline-secondary" >Limpiar</button>
+        <button (click)="register()" type="button" class="btn btn-success" [disabled]="registrando">{{ registrando ? 'Registrando...' : 'Registrarse' }}</button>
+        <button (click)="limpiar()" type="button" class="btn btn-outline-secondary" >Limpiar</button>
       </div>
+      {{mensajeError}}
+      {{mensajeExito}}
     </form>
-
-    <div class="boton-registro">
-      <button type="button" class="btn btn-outline-info">Registrarse</button>
-    </div>
     <p>¿Ya tiene una cuenta? <a routerLink="/login"> Iniciar Sesión</a></p>
   </div>
 

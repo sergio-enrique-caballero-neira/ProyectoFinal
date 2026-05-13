@@ -296,7 +296,20 @@ main.light-mode .boton-login button::after {
   content: "";
   position: absolute;
   inset: 4px;
-  background: rgba(255,255,255,0.9);
+  background: rgba(255, 255, 255, 0.9);
   border-radius: 18px;
   z-index: -1;
+}
+
+.boton-color{
+  margin-left: 12px;
+}
+
+.boton-salir:hover{
+  background-color: #ff7c7c;
+  border-color: #111111;
+}
+
+nav {
+  min-width: 100%;
 }
