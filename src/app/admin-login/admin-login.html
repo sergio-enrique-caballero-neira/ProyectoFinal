@@ -3,23 +3,34 @@
   <nav class="navbar fixed-top bg-dark border-bottom border-body" data-bs-theme="dark">
     <div class="container-fluid">
       <a class="navbar-brand">Nombre de la pagina</a>
-      <button id="boton-cambio"
-              type="button"
-              class="btn btn-outline-light"
-              (click)="toggleTheme()">
-
-        <i class="fa-solid fa-moon"></i>
-
-      </button>
+      <div>
+        <button type="button" class="btn btn-outline-light boton-salir" routerLink="/login">
+          <i class="fa-regular fa-circle-xmark"></i>
+        </button>
+        <button type="button" class="btn btn-outline-light boton-color" (click)="toggleTheme()">
+          <i [class]="darkMode ? 'fa-solid fa-moon' : 'fa-solid fa-sun'"></i>
+        </button>
+      </div>
     </div>
-
   </nav>
 
-  <div class="recuadro">
-    <h1> Inicio De Sesión</h1>
-    <form class="datos">
 
+  <div class="recuadro">
+    <h1> Inicio De Sesión Administrador</h1>
+    <form class="datos">
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="usuario"><i class="fa-solid fa-circle-user"></i></span>
+        <input [(ngModel)]="usuario" name="usuario" type="text" class="form-control" placeholder="UsuarioModel" aria-label="usuario" aria-describedby="usuario" required>
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="contrasena"><i class="fa-solid fa-lock"></i></span>
+        <input [(ngModel)]="contrasena" name="contrasena" type="password" class="form-control" placeholder="Contraseña" aria-label="contrasena" aria-describedby="contrasena" required>
+      </div>
     </form>
+    <div class="boton-login">
+      <button (click)="login()" type="button" class="btn btn-outline-success">Iniciar Sesion</button>
+      <div class="recuadro-error" *ngIf="error">{{mensajeError}}</div>
+    </div>
   </div>
 
 

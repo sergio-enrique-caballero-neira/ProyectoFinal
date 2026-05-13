@@ -7,10 +7,11 @@ import { Login } from './login/login';
 import { AdminLogin } from './admin-login/admin-login';
 import { Register } from './register/register';
 import { CargaArchivo } from './carga-archivo/carga-archivo';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [App, Login, AdminLogin, Register, CargaArchivo],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [provideBrowserGlobalErrorListeners()],
   bootstrap: [App],
 })

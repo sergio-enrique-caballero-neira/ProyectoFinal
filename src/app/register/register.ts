@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Darktheme } from '../services/darktheme';
 
 @Component({
   selector: 'app-register',
@@ -7,18 +8,15 @@ import { Component } from '@angular/core';
   styleUrl: './register.css',
 })
 export class Register {
-
+  private darkTheme = inject(Darktheme);
   darkMode = true;
 
+  ngOnInit() {
+    this.darkMode = this.darkTheme.darkMode;
+  }
+
   toggleTheme() {
-
-    this.darkMode = !this.darkMode;
-
-    if(this.darkMode){
-      document.body.classList.remove('light-mode');
-    } else {
-      document.body.classList.add('light-mode');
-    }
-
+    this.darkTheme.toggleTheme();
+    this.darkMode = this.darkTheme.darkMode;
   }
 }
