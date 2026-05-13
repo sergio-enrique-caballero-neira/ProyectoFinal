@@ -11,6 +11,8 @@ main {
   width: 100%;
   min-height: 100vh;
   display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background: black;
@@ -58,6 +60,8 @@ main.light-mode .boton-login button::after {
   box-shadow: 0 0 50px rgba(25, 29, 48, 0.3);
   overflow: hidden;
   z-index: 1;
+  margin-top: 16px;
+  margin-bottom: 16px;
 }
 
 .recuadro::before {
@@ -141,6 +145,19 @@ main.light-mode .boton-login button::after {
   transform: scale(1.05);
 }
 
-#boton-cambio{
-  margin-left: 1200px;
+.boton-color{
+  margin-left: 12px;
+}
+
+.boton-salir{
+
+}
+
+.boton-salir:hover{
+  background-color: #ff7c7c;
+  border-color: #111111;
+}
+
+nav {
+  min-width: 100%;
 }
