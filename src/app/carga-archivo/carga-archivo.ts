@@ -2,6 +2,8 @@ import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { AuthService } from '../services/auth-service';
 import { Router } from '@angular/router';
 import { Darktheme } from '../services/darktheme';
+import { UsuarioService } from '../services/usuario-service';
+import { VirusTotalService } from '../services/virus-total-serivice';
 
 @Component({
   selector: 'app-carga-archivo',
@@ -14,6 +16,8 @@ export class CargaArchivo {
 
   private darkTheme = inject(Darktheme);
   private authService = inject(AuthService);
+  private usuarioService = inject(UsuarioService);
+  private virustotalService = inject(VirusTotalService)
   private cd = inject(ChangeDetectorRef);
 
   darkMode = true;
@@ -21,6 +25,8 @@ export class CargaArchivo {
   isDragging = false;
 
   usuario: string | null = null;
+  id_usuario: number | null = null;
+  id_analisis: string | null = null;
 
   ngOnInit() {
     this.usuario = this.authService.getUsername();
@@ -73,5 +79,23 @@ export class CargaArchivo {
     this.router.navigate(['/login']);
     this.authService.logout();
     this.cd.detectChanges();
+  }
+
+  subirArchivo() {
+    if (!this.selectedFile) return;
+
+    this.usuarioService.getIdByUsername(this.usuario!).subscribe({
+      next: (res) => {
+        this.id_usuario = res.body;
+
+        this.virustotalService.postSubirArchivo(this.id_usuario!, this.selectedFile!).subscribe({
+          next: (res) => {
+            this.id_analisis = res;
+          },
+          error: (err) => console.log(err)
+        });
+      },
+      error: (err) => console.log(err)
+    });
   }
 }

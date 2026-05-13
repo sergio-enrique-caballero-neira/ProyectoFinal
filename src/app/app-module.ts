@@ -8,11 +8,16 @@ import { AdminLogin } from './admin-login/admin-login';
 import { Register } from './register/register';
 import { CargaArchivo } from './carga-archivo/carga-archivo';
 import { FormsModule } from '@angular/forms';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { authInterceptor } from './auth-interceptor';
 
 @NgModule({
   declarations: [App, Login, AdminLogin, Register, CargaArchivo],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
-  providers: [provideBrowserGlobalErrorListeners()],
+  providers: [
+    provideBrowserGlobalErrorListeners(),
+    provideHttpClient(withInterceptors([authInterceptor]))
+  ],
   bootstrap: [App],
 })
 export class AppModule {}

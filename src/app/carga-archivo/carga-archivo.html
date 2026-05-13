@@ -21,7 +21,6 @@
       (dragleave)="onDragLeave($event)"
       (drop)="onDrop($event)"
       [class.dragging]="isDragging">
-
       <div *ngIf="!selectedFile">
         <i class="fa-solid fa-cloud-arrow-up"></i>
         <h2>Arrastra tu archivo aquí</h2>
@@ -42,8 +41,9 @@
     </div>
 
     <div class="botones-acciones">
-      <button class="led-btn">Subir</button>
+      <button (click)="subirArchivo()" class="led-btn">Subir</button>
       <button class="led-btn">Analizar</button>
+      {{id_analisis}}
     </div>
   </div>
 
