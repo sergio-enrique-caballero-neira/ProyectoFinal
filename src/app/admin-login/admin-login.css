@@ -149,10 +149,6 @@ main.light-mode .boton-login button::after {
   margin-left: 12px;
 }
 
-.boton-salir{
-
-}
-
 .boton-salir:hover{
   background-color: #ff7c7c;
   border-color: #111111;

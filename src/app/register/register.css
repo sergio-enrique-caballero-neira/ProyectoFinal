@@ -170,6 +170,7 @@ main.light-mode .boton-login button::after {
   flex-wrap: wrap;
   gap: 10px;
   margin-top: 6px;
+  justify-content: center;
 }
 
 nav {

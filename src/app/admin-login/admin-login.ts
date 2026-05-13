@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth-service';
+import { Darktheme } from '../services/darktheme';
 
 @Component({
   selector: 'app-admin-login',
@@ -11,6 +12,7 @@ import { AuthService } from '../services/auth-service';
 export class AdminLogin {
   constructor(private router: Router) {}
 
+  private darkTheme = inject(Darktheme);
   private authService = inject(AuthService);
   private cd = inject(ChangeDetectorRef);
 
@@ -22,17 +24,12 @@ export class AdminLogin {
   darkMode = true;
 
   ngOnInit() {
-
+    this.darkMode = this.darkTheme.darkMode;
   }
 
   toggleTheme() {
-    this.darkMode = !this.darkMode;
-
-    if (this.darkMode) {
-      document.body.classList.remove('light-mode');
-    } else {
-      document.body.classList.add('light-mode');
-    }
+    this.darkTheme.toggleTheme();
+    this.darkMode = this.darkTheme.darkMode;
   }
 
   login() {

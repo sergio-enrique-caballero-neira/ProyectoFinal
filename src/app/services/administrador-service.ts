@@ -16,47 +16,19 @@ export class AdministradorService {
     });
   }
 
-  postAdministrador(
-    nombre: string,
-    email: string,
-    telefono: string,
-    contrasena: string,
-    cargo: string,
-  ) {
-    const url =
-      this.urlbase +
-      '/administrador/crear?' +
-      'nombre=' +
-      encodeURIComponent(nombre) +
-      '&' +
-      'email=' +
-      encodeURIComponent(email) +
-      '&' +
-      'telefono=' +
-      encodeURIComponent(telefono) +
-      '&' +
-      'contrasena=' +
-      encodeURIComponent(contrasena) +
-      '&' +
-      'cargo=' +
-      encodeURIComponent(cargo);
+  postAdministrador(nombre: string, email: string, telefono: string, contrasena: string, cargo: string,) {
+    const url = this.urlbase + '/administrador/crear?' +
+      'nombre=' + encodeURIComponent(nombre) + '&' +
+      'email=' + encodeURIComponent(email) + '&' +
+      'telefono=' + encodeURIComponent(telefono) + '&' +
+      'contrasena=' + encodeURIComponent(contrasena) + '&' +
+      'cargo=' + encodeURIComponent(cargo);
     return this.cliente.post(url, null, { responseType: 'text' });
   }
 
-  putAdministrador(
-    id: number,
-    nombre: string,
-    email: string,
-    telefono: string,
-    contrasena: string,
-    cargo: string,
-  ) {
-    const url =
-      this.urlbase +
-      '/administrador/actualizar?' +
-      'id=' +
-      id +
-      '&' +
+  putAdministrador(id: number, nombre: string, email: string,telefono: string,contrasena: string, cargo: string,) {
+    const url = this.urlbase + '/administrador/actualizar?' +
+      'id=' + id + '&' +
       'nombre=' +
       encodeURIComponent(nombre) +
       '&' +
@@ -75,6 +47,8 @@ export class AdministradorService {
   }
 
   deleteAdministrador(id: number) {
-    return this.cliente.delete(this.urlbase + '/administrador/eliminar?id=' + id, {responseType: 'text',});
+    return this.cliente.delete(this.urlbase + '/administrador/eliminar?id=' + id, {
+      responseType: 'text',
+    });
   }
 }
