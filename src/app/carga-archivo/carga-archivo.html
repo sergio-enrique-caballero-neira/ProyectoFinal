@@ -14,36 +14,64 @@
     </div>
   </nav>
 
-  <div class="upload-section">
-    <div
-      class="drop-zone"
-      (dragover)="onDragOver($event)"
-      (dragleave)="onDragLeave($event)"
-      (drop)="onDrop($event)"
-      [class.dragging]="isDragging">
-      <div *ngIf="!selectedFile">
-        <i class="fa-solid fa-cloud-arrow-up"></i>
-        <h2>Arrastra tu archivo aquí</h2>
-        <p>o</p>
-        <label class="upload-btn">
-          Seleccionar archivo
-          <input type="file" hidden (change)="onFileSelected($event)">
-        </label>
-      </div>
+  <div class="seccion-principal">
+    <div class="upload-section" *ngIf="seccion === 'upload'">
+      <div
+        class="drop-zone"
+        (dragover)="onDragOver($event)"
+        (dragleave)="onDragLeave($event)"
+        (drop)="onDrop($event)"
+        [class.dragging]="isDragging">
+        <div *ngIf="!selectedFile">
+          <i class="fa-solid fa-cloud-arrow-up"></i>
+          <h2>Arrastra tu archivo aquí</h2>
+          <p>o</p>
+          <label class="upload-btn">
+            Seleccionar archivo
+            <input type="file" hidden (change)="onFileSelected($event)">
+          </label>
+        </div>
 
-      <div *ngIf="selectedFile">
-        <i class="fa-solid fa-file-shield archivo-icon"></i>
-        <h2>{{ selectedFile.name }}</h2>
-        <p>{{ getFileSize() }}</p>
-        <button class="remove-btn" (click)="removeFile()">Eliminar archivo</button>
+        <div *ngIf="selectedFile">
+          <i class="fa-solid fa-file-shield archivo-icon"></i>
+          <h2>{{ selectedFile.name }}</h2>
+          <p>{{ getFileSize() }}</p>
+          <button class="remove-btn" (click)="removeFile()">Eliminar archivo</button>
+        </div>
       </div>
+    </div>
 
+    <div class="subido" *ngIf="seccion === 'subido'">
+      <div class="subido-inner">
+        <div class="subido-icono">
+          <i class="fa-solid fa-circle-check"></i>
+        </div>
+        <h2>Archivo subido correctamente</h2>
+        <p class="subido-nombre">{{ selectedFile?.name }}</p>
+        <p class="subido-size">{{ getFileSize() }}</p>
+      </div>
+    </div>
+
+    <div class="cargando" *ngIf="seccion === 'cargando'">
+      <div class="cargando-inner">
+        <div class="cargando-icono">
+          <i class="fa-solid fa-shield-halved"></i>
+        </div>
+        <h2>Analizando archivo...</h2>
+        <p class="cargando-nombre">{{ selectedFile?.name }}</p>
+        <div class="barra-progreso">
+          <div class="barra-relleno"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="analisis-seccion" *ngIf="seccion === 'analizado'">
+      <app-analisis [analisis]="analisis!" [darkMode]="darkMode"></app-analisis>
     </div>
 
     <div class="botones-acciones">
       <button (click)="subirArchivo()" class="led-btn">Subir</button>
-      <button class="led-btn">Analizar</button>
-      {{id_analisis}}
+      <button (click)="analizar()" class="led-btn">Analizar</button>
     </div>
   </div>
 
