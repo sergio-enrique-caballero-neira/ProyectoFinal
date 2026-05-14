@@ -1,6 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UsuarioModel } from '../models/usuario.model';
+import { VirusTotalUploadResponseModel } from '../models/virus-total-upload-response.model';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +19,12 @@ export class UsuarioService {
 
   getIdByUsername(username: string) {
     return this.cliente.get<number>(`${this.urlbase}/usuario/getIdByUsername?nombre=${username}`, {
+      observe: 'response',
+    });
+  }
+
+  getHistorialById(id: number){
+    return this.cliente.get<VirusTotalUploadResponseModel[]>(`${this.urlbase}/usuario/getHistorialById?id=${id}`, {
       observe: 'response',
     });
   }

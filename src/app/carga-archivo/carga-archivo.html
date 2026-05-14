@@ -65,7 +65,7 @@
       </div>
     </div>
 
-    <div class="analisis-seccion" *ngIf="seccion === 'analizado'">
+    <div class="analisis-seccion" *ngIf="seccion === 'analizado' && analisis">
       <app-analisis [analisis]="analisis!" [darkMode]="darkMode"></app-analisis>
     </div>
 
@@ -79,7 +79,23 @@
     <div class="recuadro-titulo">
       <h1>Historial</h1>
     </div>
-    <div class="recuadro-historial"></div>
+    <div class="recuadro-historial">
+      <div class="recuadro-historial-inner">
+        <div *ngIf="historial.length === 0" class="historial-vacio">
+          <i class="fa-solid fa-clock-rotate-left"></i>
+          <p>Sin análisis previos</p>
+        </div>
+        <div *ngFor="let item of historial" class="historial-item">
+          <div class="historial-info" >
+            <span class="historial-nombre">{{ item.data.nombreArchivo }}</span>
+            <span class="historial-id">{{ item.data.id }}</span>
+          </div>
+          <button class="historial-btn" (click)="verAnalisis(item)">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 
 </main>

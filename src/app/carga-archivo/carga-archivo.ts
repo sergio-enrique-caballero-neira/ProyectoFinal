@@ -32,11 +32,39 @@ export class CargaArchivo {
 
   seccion = 'upload';
 
+  historial: VirusTotalUploadResponseModel[] = [];
+
   analisis: VirusTotalUploadResponseModel | null = null;
 
   ngOnInit() {
     this.usuario = this.authService.getUsername();
     this.darkMode = this.darkTheme.darkMode;
+
+    if (!this.usuario) return;
+
+    this.usuarioService.getIdByUsername(this.usuario).subscribe({
+      next: (res) => {
+        this.id_usuario = res.body;
+        if (!this.id_usuario) return;
+        this.usuarioService.getHistorialById(this.id_usuario).subscribe({
+          next: (res) => {
+            if (!res.body) {
+              console.log('El historial esta vacio');
+              return;
+            }
+            this.historial = res.body;
+            this.cd.detectChanges();
+          },
+          error: (err) => {
+            console.log(err);
+          },
+        });
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+    this.cd.detectChanges();
   }
 
   toggleTheme() {
@@ -91,34 +119,22 @@ export class CargaArchivo {
   }
 
   subirArchivo() {
-    if (!this.selectedFile || !this.usuario) return;
+    if (!this.selectedFile || !this.id_usuario) return;
 
     this.nombre_archivo = this.selectedFile.name;
 
     this.seccion = 'cargando';
 
-    this.usuarioService.getIdByUsername(this.usuario).subscribe({
+    this.virustotalService.postSubirArchivo(this.id_usuario, this.selectedFile).subscribe({
       next: (res) => {
-        this.id_usuario = res.body;
-
-        if (!this.id_usuario || !this.selectedFile) return;
-
-        this.virustotalService.postSubirArchivo(this.id_usuario, this.selectedFile).subscribe({
-          next: (res) => {
-            this.id_analisis = res;
-            this.seccion = 'subido';
-            this.cd.detectChanges();
-          },
-          error: (err) => {
-            console.log(err);
-            this.seccion = 'upload';
-            this.cd.detectChanges();
-          },
-        });
+        this.id_analisis = res;
+        this.seccion = 'subido';
+        this.cd.detectChanges();
       },
       error: (err) => {
         console.log(err);
         this.seccion = 'upload';
+        this.cd.detectChanges();
       },
     });
   }
@@ -142,6 +158,42 @@ export class CargaArchivo {
       },
     });
 
+    this.cd.detectChanges();
+  }
+
+  verAnalisis(item: VirusTotalUploadResponseModel) {
+    this.analisis = null;
+    this.seccion = 'cargando';
+    this.cd.detectChanges();
+
+    if (!item.data.attributes) {
+      if (!this.id_usuario) return;
+      this.virustotalService.getAnalisis(this.id_usuario, item.data.id).subscribe({
+        next: (res) => {
+          this.analisis = res.body;
+          this.seccion = 'analizado';
+          if (!this.id_usuario) return;
+          this.usuarioService.getHistorialById(this.id_usuario).subscribe({
+            next: (res) => {
+              if (res.body) this.historial = res.body;
+              this.cd.detectChanges();
+            },
+            error: (err) => console.log(err),
+          });
+          this.cd.detectChanges();
+        },
+        error: (err) => {
+          console.log(err);
+          this.seccion = 'upload';
+          this.cd.detectChanges();
+        },
+      });
+      return;
+    }
+
+    this.analisis = item;
+    this.seccion = 'analizado';
+    this.selectedFile = null;
     this.cd.detectChanges();
   }
 }
