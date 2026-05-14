@@ -22,7 +22,7 @@ export class Analisis implements OnInit {
 
   totalAntivirus = 0;
 
-  categoriaVirus: string = '';
+  categoriaVirus = '';
 
   ngOnInit() {
     const results = this.analisis.data.attributes.results;

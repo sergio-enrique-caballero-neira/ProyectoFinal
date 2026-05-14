@@ -102,7 +102,7 @@
     <div *ngIf="maliciosos.length > 0">
       <h3 class="grupo-titulo malicioso"><i class="fa-solid fa-bug"></i> Maliciosos ({{ maliciosos.length }})</h3>
       <div class="antivirus-item" *ngFor="let m of maliciosos"
-           (click)="toggleAntivirus(m.engine_name), setCategoryLabel(m.category)" [class.expandido]="antivirusExpandido === m.engine_name">
+           (click)="toggleAntivirus(m.engine_name); setCategoryLabel(m.category)" [class.expandido]="antivirusExpandido === m.engine_name">
         <div class="antivirus-header">
           <span class="antivirus-nombre">{{ m.engine_name }}</span>
           <div class="antivirus-derecha">
@@ -125,7 +125,7 @@
       <h3 class="grupo-titulo sospechoso"><i class="fa-solid fa-triangle-exclamation"></i> Sospechosos
         ({{ sospechosos.length }})</h3>
       <div class="antivirus-item" *ngFor="let m of sospechosos"
-           (click)="toggleAntivirus(m.engine_name), setCategoryLabel(m.category)" [class.expandido]="antivirusExpandido === m.engine_name">
+           (click)="toggleAntivirus(m.engine_name); setCategoryLabel(m.category)" [class.expandido]="antivirusExpandido === m.engine_name">
         <div class="antivirus-header">
           <span class="antivirus-nombre">{{ m.engine_name }}</span>
           <div class="antivirus-derecha">
@@ -148,7 +148,7 @@
 
   <div class="vista-contenido" *ngIf="vista === 'todos'">
     <div class="antivirus-item" *ngFor="let m of maliciosos"
-         (click)="toggleAntivirus(m.engine_name), setCategoryLabel(m.category)" [class.expandido]="antivirusExpandido === m.engine_name">
+         (click)="toggleAntivirus(m.engine_name); setCategoryLabel(m.category)" [class.expandido]="antivirusExpandido === m.engine_name">
       <div class="antivirus-header">
         <span class="antivirus-nombre">{{ m.engine_name }}</span>
         <div class="antivirus-derecha">
@@ -164,7 +164,7 @@
       </div>
     </div>
     <div class="antivirus-item" *ngFor="let m of sospechosos"
-         (click)="toggleAntivirus(m.engine_name), setCategoryLabel(m.category)" [class.expandido]="antivirusExpandido === m.engine_name">
+         (click)="toggleAntivirus(m.engine_name); setCategoryLabel(m.category)" [class.expandido]="antivirusExpandido === m.engine_name">
       <div class="antivirus-header">
         <span class="antivirus-nombre">{{ m.engine_name }}</span>
         <div class="antivirus-derecha">
@@ -180,7 +180,7 @@
       </div>
     </div>
     <div class="antivirus-item" *ngFor="let m of limpios"
-         (click)="toggleAntivirus(m.engine_name), setCategoryLabel(m.category)" [class.expandido]="antivirusExpandido === m.engine_name">
+         (click)="toggleAntivirus(m.engine_name); setCategoryLabel(m.category)" [class.expandido]="antivirusExpandido === m.engine_name">
       <div class="antivirus-header">
         <span class="antivirus-nombre">{{ m.engine_name }}</span>
         <div class="antivirus-derecha">
@@ -195,7 +195,7 @@
       </div>
     </div>
     <div class="antivirus-item" *ngFor="let m of noDetectados"
-         (click)="toggleAntivirus(m.engine_name), setCategoryLabel(m.category)" [class.expandido]="antivirusExpandido === m.engine_name">
+         (click)="toggleAntivirus(m.engine_name); setCategoryLabel(m.category)" [class.expandido]="antivirusExpandido === m.engine_name">
       <div class="antivirus-header">
         <span class="antivirus-nombre">{{ m.engine_name }}</span>
         <div class="antivirus-derecha">
