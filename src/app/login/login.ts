@@ -16,10 +16,10 @@ export class Login {
   private authService = inject(AuthService);
   private cd = inject(ChangeDetectorRef);
 
-  error: boolean = false;
-  mensajeError: string = '';
-  usuario: string = '';
-  contrasena: string = '';
+  error = false;
+  mensajeError = '';
+  usuario = '';
+  contrasena = '';
 
   darkMode = true;
 

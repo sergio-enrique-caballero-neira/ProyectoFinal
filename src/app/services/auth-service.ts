@@ -12,9 +12,7 @@ export class AuthService {
   private readonly urlbase: string = 'http://localhost:8080';
 
   login(nombre: string, contrasena: string) {
-    const url = this.urlbase + '/auth/login?' +
-      'nombre=' + encodeURIComponent(nombre) + '&' +
-      'contrasena=' + encodeURIComponent(contrasena);
+    const url = `${this.urlbase}/auth/login?nombre=${encodeURIComponent(nombre)}&contrasena=${encodeURIComponent(contrasena)}`;
     return this.cliente.post<AuthResponse>(url, null, {}).pipe(
       tap((res) => {
         localStorage.setItem('token', res.token);
@@ -30,19 +28,7 @@ export class AuthService {
     localStorage.removeItem('username');
   }
 
-  isLoggedIn(): boolean {
-    return !!localStorage.getItem('token');
-  }
-
-  getRole(): string | null {
-    return localStorage.getItem('role');
-  }
-
   getUsername() {
     return localStorage.getItem('username');
-  }
-
-  getToken() {
-    return localStorage.getItem('token');
   }
 }

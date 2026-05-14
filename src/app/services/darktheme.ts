@@ -6,8 +6,6 @@ import { Injectable } from '@angular/core';
 export class Darktheme {
   public darkMode = true;
 
-  constructor() { }
-
   toggleTheme() {
     this.darkMode = !this.darkMode;
 
