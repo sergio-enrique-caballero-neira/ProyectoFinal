@@ -41,7 +41,7 @@ export class Register {
       .subscribe({
         next: (res) => {
           this.registrando = false;
-          this.mensajeExito = 'Usuario registrado exitosamente';
+          this.mensajeExito = res;
           this.mensajeError = '';
           this.cd.detectChanges();
         },

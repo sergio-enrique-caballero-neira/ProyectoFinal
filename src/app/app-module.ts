@@ -10,13 +10,14 @@ import { CargaArchivo } from './carga-archivo/carga-archivo';
 import { FormsModule } from '@angular/forms';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { authInterceptor } from './auth-interceptor';
+import { Analisis } from './analisis/analisis';
 
 @NgModule({
-  declarations: [App, Login, AdminLogin, Register, CargaArchivo],
+  declarations: [App, Login, AdminLogin, Register, CargaArchivo, Analisis],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideHttpClient(withInterceptors([authInterceptor]))
+    provideHttpClient(withInterceptors([authInterceptor])),
   ],
   bootstrap: [App],
 })

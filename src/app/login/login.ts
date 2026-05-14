@@ -49,6 +49,7 @@ export class Login {
       error: (err) => {
         this.error = true;
         this.mensajeError = 'Usuario o Contraseña incorrectos';
+        console.log(err);
         this.cd.detectChanges();
       },
     });

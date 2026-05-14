@@ -1,0 +1,596 @@
+.analisis-wrapper {
+  width: 100%;
+  max-width: 700px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  color: #edf4ff;
+}
+
+.analisis-wrapper.light-mode {
+  color: #142033;
+}
+
+.cabecera {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  border-radius: 20px;
+  background: rgba(8, 15, 28, 0.84);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 18px 42px rgba(6, 11, 22, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+.analisis-wrapper.light-mode .cabecera {
+  background: rgba(255, 255, 255, 0.88);
+  border-color: rgba(20, 32, 51, 0.10);
+  box-shadow: 0 18px 42px rgba(73, 97, 132, 0.18);
+}
+
+.cabecera::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 22px;
+  background: linear-gradient(45deg, #5b8cff, #8b5cf6, #22c55e, #5b8cff);
+  background-size: 400%;
+  z-index: -2;
+  animation: borderAnimation 8s linear infinite;
+}
+
+.cabecera::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  background: rgba(13, 21, 37, 0.94);
+  border-radius: 18px;
+  z-index: -1;
+}
+
+.analisis-wrapper.light-mode .cabecera::after {
+  background: rgba(255, 255, 255, 0.94);
+}
+
+.cabecera-icono {
+  font-size: 38px;
+  flex-shrink: 0;
+  z-index: 1;
+  color: #5b8cff;
+}
+
+.cabecera-info {
+  flex: 1;
+  min-width: 0;
+  z-index: 1;
+}
+
+.cabecera-info h2 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0 0 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cabecera-badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.badge-riesgo {
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.badge-riesgo.limpio {
+  background: rgba(34, 197, 94, 0.15);
+  color: #22c55e;
+}
+
+.badge-riesgo.sospechoso {
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+}
+
+.badge-riesgo.peligroso {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+}
+
+.badge-tipo {
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  background: rgba(91, 140, 255, 0.15);
+  color: #5b8cff;
+}
+
+.cabecera-detecciones {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.detecciones-num {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.detecciones-sub {
+  font-size: 0.7rem;
+  opacity: 0.5;
+}
+
+.cabecera-detecciones.limpio .detecciones-num {
+  color: #22c55e;
+}
+
+.cabecera-detecciones.sospechoso .detecciones-num {
+  color: #f59e0b;
+}
+
+.cabecera-detecciones.peligroso .detecciones-num {
+  color: #ef4444;
+}
+
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 14px 8px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(8, 15, 28, 0.7);
+  text-align: center;
+}
+
+.analisis-wrapper.light-mode .stat-card {
+  background: rgba(255, 255, 255, 0.82);
+  border-color: rgba(20, 32, 51, 0.08);
+}
+
+.stat-card i {
+  font-size: 18px;
+}
+
+.stat-card.malicioso i {
+  color: #ef4444;
+}
+
+.stat-card.sospechoso i {
+  color: #f59e0b;
+}
+
+.stat-card.limpio i {
+  color: #22c55e;
+}
+
+.stat-card.nd i {
+  color: #6b7fa3;
+}
+
+.stat-num {
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.stat-card.malicioso .stat-num {
+  color: #ef4444;
+}
+
+.stat-card.sospechoso .stat-num {
+  color: #f59e0b;
+}
+
+.stat-card.limpio .stat-num {
+  color: #22c55e;
+}
+
+.stat-card.nd .stat-num {
+  color: #6b7fa3;
+}
+
+.stat-label {
+  font-size: 0.72rem; color: #a9b7d0;
+}
+
+.analisis-wrapper.light-mode .stat-label {
+  color: #5f6f85;
+}
+
+.nav-vistas {
+  display: flex;
+  gap: 6px;
+  padding: 6px;
+  background: rgba(8, 15, 28, 0.6);
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.analisis-wrapper.light-mode .nav-vistas {
+  background: rgba(255, 255, 255, 0.7);
+  border-color: rgba(20, 32, 51, 0.08);
+}
+
+.nav-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 9px 12px;
+  border-radius: 10px;
+  border: none;
+  background: transparent;
+  color: #a9b7d0;
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.nav-btn:hover {
+  background: rgba(91, 140, 255, 0.10);
+  color: #edf4ff;
+}
+
+.nav-btn.activo {
+  background: rgba(91, 140, 255, 0.18);
+  color: #5b8cff;
+  font-weight: 600;
+}
+
+.analisis-wrapper.light-mode .nav-btn:hover {
+  color: #142033;
+}
+
+.nav-badge {
+  background: #ef4444;
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 999px;
+}
+
+.vista-contenido {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.barra-wrap {
+  padding: 18px 20px;
+  border-radius: 14px;
+  background: rgba(8, 15, 28, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.analisis-wrapper.light-mode .barra-wrap {
+  background: rgba(255, 255, 255, 0.82);
+  border-color: rgba(20, 32, 51, 0.08);
+}
+
+.barra-total {
+  display: flex;
+  height: 10px;
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 12px;
+  gap: 2px;
+}
+
+.barra-seg {
+  background: #22c55e;
+  border-radius: 999px;
+  transition: width 0.5s;
+}
+
+.barra-nd  {
+  background: #4b5f7c;
+  border-radius: 999px;
+  transition: width 0.5s;
+}
+
+.barra-sus {
+  background: #f59e0b;
+  border-radius: 999px;
+  transition: width 0.5s;
+}
+
+.barra-mal {
+  background: #ef4444;
+  border-radius: 999px;
+  transition: width 0.5s;
+}
+
+.barra-leyenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  font-size: 0.75rem;
+  color: #a9b7d0;
+}
+
+.analisis-wrapper.light-mode .barra-leyenda {
+  color: #5f6f85;
+}
+
+.dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 4px;
+}
+
+.dot.seg {
+  background: #22c55e;
+}
+
+.dot.nd  {
+  background: #4b5f7c;
+}
+
+.dot.sus {
+  background: #f59e0b;
+}
+
+.dot.mal {
+  background: #ef4444;
+}
+
+.id-bloque {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px 18px;
+  border-radius: 12px;
+  background: rgba(8, 15, 28, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.analisis-wrapper.light-mode .id-bloque {
+  background: rgba(255, 255, 255, 0.82);
+  border-color: rgba(20, 32, 51, 0.08);
+}
+
+.id-label {
+  font-size: 0.75rem;
+  color: #a9b7d0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.analisis-wrapper.light-mode .id-label {
+  color: #5f6f85;
+}
+
+.id-valor {
+  font-family: monospace;
+  font-size: 0.78rem;
+  color: #5b8cff;
+  word-break: break-all;
+}
+
+.veredicto {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 18px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.veredicto i {
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.veredicto p {
+  margin: 0;
+}
+
+.veredicto.limpio {
+  background: rgba(34, 197, 94, 0.10);
+  border: 1px solid rgba(34, 197, 94, 0.25);
+  color: #22c55e;
+}
+
+.veredicto.sospechoso {
+  background: rgba(245, 158, 11, 0.10);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  color: #f59e0b;
+}
+
+.veredicto.peligroso {
+  background: rgba(239, 68, 68, 0.10);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  color: #ef4444;
+}
+
+.grupo-titulo {
+  font-size: 0.82rem;
+  font-weight: 600;
+  margin: 0 0 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.grupo-titulo.malicioso {
+  color: #ef4444;
+}
+
+.grupo-titulo.sospechoso {
+  color: #f59e0b;
+}
+
+.antivirus-item {
+  border-radius: 12px;
+  background: rgba(8, 15, 28, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.2s;
+  margin-bottom: 6px;
+}
+
+.antivirus-item:hover {
+  border-color: rgba(91, 140, 255, 0.25);
+}
+.antivirus-item.expandido {
+  border-color: rgba(91, 140, 255, 0.35);
+}
+
+.analisis-wrapper.light-mode .antivirus-item {
+  background: rgba(255, 255, 255, 0.82);
+  border-color: rgba(20, 32, 51, 0.08);
+}
+
+.antivirus-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px 14px;
+  gap: 10px;
+}
+
+.antivirus-nombre {
+  font-size: 0.85rem;
+  font-weight: 500;
+  flex: 1;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.antivirus-derecha {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.antivirus-chevron {
+  font-size: 0.7rem;
+  color: #6b7fa3;
+  transition: transform 0.2s;
+}
+
+.antivirus-item.expandido .antivirus-chevron {
+  transform: rotate(180deg);
+}
+
+.tag {
+  padding: 2px 9px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.tag-malicioso {
+  background: rgba(239, 68, 68, 0.15);
+  color: #ef4444;
+}
+
+.tag-sospechoso {
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+}
+
+.tag-limpio {
+  background: rgba(34, 197, 94, 0.15);
+  color: #22c55e;
+}
+
+.tag-nd {
+  background: rgba(107, 127, 163, 0.15);
+  color: #6b7fa3;
+}
+
+.antivirus-detalle {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  animation: slideDown 0.15s ease;
+}
+
+.analisis-wrapper.light-mode .antivirus-detalle {
+  border-top-color: rgba(20, 32, 51, 0.07);
+}
+
+.detalle-fila {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  gap: 10px;
+}
+
+.detalle-key {
+  color: #6b7fa3;
+  flex-shrink: 0;
+}
+.detalle-val {
+  font-weight: 500;
+  text-align: right;
+  word-break: break-all;
+}
+
+.lista-vacia {
+  text-align: center;
+  padding: 30px;
+  color: #22c55e;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+@keyframes borderAnimation {
+  0%   {
+    background-position: 0 50%;
+  }
+  50%  {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to   {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

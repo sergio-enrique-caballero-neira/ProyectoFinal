@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Darktheme } from '../services/darktheme';
 import { UsuarioService } from '../services/usuario-service';
 import { VirusTotalService } from '../services/virus-total-serivice';
+import { VirusTotalUploadResponseModel } from '../models/virus-total-upload-response.model';
 
 @Component({
   selector: 'app-carga-archivo',
@@ -17,7 +18,7 @@ export class CargaArchivo {
   private darkTheme = inject(Darktheme);
   private authService = inject(AuthService);
   private usuarioService = inject(UsuarioService);
-  private virustotalService = inject(VirusTotalService)
+  private virustotalService = inject(VirusTotalService);
   private cd = inject(ChangeDetectorRef);
 
   darkMode = true;
@@ -27,6 +28,11 @@ export class CargaArchivo {
   usuario: string | null = null;
   id_usuario: number | null = null;
   id_analisis: string | null = null;
+  nombre_archivo: string | null = null;
+
+  seccion = 'upload';
+
+  analisis: VirusTotalUploadResponseModel | null = null;
 
   ngOnInit() {
     this.usuario = this.authService.getUsername();
@@ -84,6 +90,10 @@ export class CargaArchivo {
   subirArchivo() {
     if (!this.selectedFile) return;
 
+    this.nombre_archivo = this.selectedFile.name;
+
+    this.seccion = 'cargando';
+
     this.usuarioService.getIdByUsername(this.usuario!).subscribe({
       next: (res) => {
         this.id_usuario = res.body;
@@ -91,11 +101,42 @@ export class CargaArchivo {
         this.virustotalService.postSubirArchivo(this.id_usuario!, this.selectedFile!).subscribe({
           next: (res) => {
             this.id_analisis = res;
+            this.seccion = 'subido';
+            this.cd.detectChanges();
           },
-          error: (err) => console.log(err)
+          error: (err) => {
+            console.log(err);
+            this.seccion = 'upload';
+            this.cd.detectChanges()
+          },
         });
       },
-      error: (err) => console.log(err)
+      error: (err) => {
+        console.log(err);
+        this.seccion = 'upload';
+      },
     });
+  }
+
+  analizar() {
+    if (!this.id_usuario || !this.id_analisis) return;
+
+    this.seccion = 'cargando';
+
+    this.virustotalService.getAnalisis(this.id_usuario, this.id_analisis).subscribe({
+      next: (res) => {
+        console.log(res.body);
+        this.seccion = 'analizado';
+        this.analisis = res.body;
+        this.cd.detectChanges();
+      },
+      error: (err) => {
+        console.log(err);
+        this.seccion = 'subido';
+        this.cd.detectChanges();
+      },
+    });
+
+    this.cd.detectChanges();
   }
 }
