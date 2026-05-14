@@ -167,11 +167,13 @@ export class CargaArchivo {
     this.cd.detectChanges();
 
     if (!item.data.attributes) {
-      this.virustotalService.getAnalisis(this.id_usuario!, item.data.id).subscribe({
+      if (!this.id_usuario) return;
+      this.virustotalService.getAnalisis(this.id_usuario, item.data.id).subscribe({
         next: (res) => {
           this.analisis = res.body;
           this.seccion = 'analizado';
-          this.usuarioService.getHistorialById(this.id_usuario!).subscribe({
+          if (!this.id_usuario) return;
+          this.usuarioService.getHistorialById(this.id_usuario).subscribe({
             next: (res) => {
               if (res.body) this.historial = res.body;
               this.cd.detectChanges();
