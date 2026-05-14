@@ -58,10 +58,14 @@
 
     <div class="barra-wrap">
       <div class="barra-total">
-        <div class="barra-seg" [style.width.%]="totalAntivirus ? (analisis.data.attributes.stats.harmless   / totalAntivirus * 100) : 0"></div>
-        <div class="barra-nd"  [style.width.%]="totalAntivirus ? (analisis.data.attributes.stats.undetected / totalAntivirus * 100) : 0"></div>
-        <div class="barra-sus" [style.width.%]="totalAntivirus ? (analisis.data.attributes.stats.suspicious / totalAntivirus * 100) : 0"></div>
-        <div class="barra-mal" [style.width.%]="totalAntivirus ? (analisis.data.attributes.stats.malicious  / totalAntivirus * 100) : 0"></div>
+        <div class="barra-seg"
+             [style.width.%]="totalAntivirus ? (analisis.data.attributes.stats.harmless   / totalAntivirus * 100) : 0"></div>
+        <div class="barra-nd"
+             [style.width.%]="totalAntivirus ? (analisis.data.attributes.stats.undetected / totalAntivirus * 100) : 0"></div>
+        <div class="barra-sus"
+             [style.width.%]="totalAntivirus ? (analisis.data.attributes.stats.suspicious / totalAntivirus * 100) : 0"></div>
+        <div class="barra-mal"
+             [style.width.%]="totalAntivirus ? (analisis.data.attributes.stats.malicious  / totalAntivirus * 100) : 0"></div>
       </div>
       <div class="barra-leyenda">
         <span><span class="dot seg"></span>Seguros ({{ analisis.data.attributes.stats.harmless }})</span>
@@ -77,12 +81,14 @@
     </div>
 
     <div class="veredicto" [ngClass]="getNivelRiesgo()">
-      <i class="fa-solid fa-circle-check"         *ngIf="getNivelRiesgo() === 'limpio'"></i>
+      <i class="fa-solid fa-circle-check" *ngIf="getNivelRiesgo() === 'limpio'"></i>
       <i class="fa-solid fa-triangle-exclamation" *ngIf="getNivelRiesgo() === 'sospechoso'"></i>
-      <i class="fa-solid fa-skull-crossbones"     *ngIf="getNivelRiesgo() === 'peligroso'"></i>
-      <p *ngIf="getNivelRiesgo() === 'limpio'">Ningún  antivirus detectó amenazas en este archivo.</p>
-      <p *ngIf="getNivelRiesgo() === 'sospechoso'">Algunos antivirus marcaron este archivo como sospechoso. Procede con precaución.</p>
-      <p *ngIf="getNivelRiesgo() === 'peligroso'">Múltiples antivirus detectaron este archivo como malicioso. Se recomienda eliminarlo.</p>
+      <i class="fa-solid fa-skull-crossbones" *ngIf="getNivelRiesgo() === 'peligroso'"></i>
+      <p *ngIf="getNivelRiesgo() === 'limpio'">Ningún antivirus detectó amenazas en este archivo.</p>
+      <p *ngIf="getNivelRiesgo() === 'sospechoso'">Algunos antivirus marcaron este archivo como sospechoso. Procede con
+        precaución.</p>
+      <p *ngIf="getNivelRiesgo() === 'peligroso'">Múltiples antivirus detectaron este archivo como malicioso. Se
+        recomienda eliminarlo.</p>
     </div>
 
   </div>
@@ -96,37 +102,44 @@
     <div *ngIf="maliciosos.length > 0">
       <h3 class="grupo-titulo malicioso"><i class="fa-solid fa-bug"></i> Maliciosos ({{ maliciosos.length }})</h3>
       <div class="antivirus-item" *ngFor="let m of maliciosos"
-           (click)="toggleAntivirus(m.nombre)" [class.expandido]="antivirusExpandido === m.nombre">
+           (click)="toggleAntivirus(m.engine_name), setCategoryLabel(m.category)" [class.expandido]="antivirusExpandido === m.engine_name">
         <div class="antivirus-header">
-          <span class="antivirus-nombre">{{ m.nombre }}</span>
+          <span class="antivirus-nombre">{{ m.engine_name }}</span>
           <div class="antivirus-derecha">
-            <span class="tag tag-malicioso">{{ m.resultado || 'Malicioso' }}</span>
+            <span class="tag tag-malicioso">{{ m.result || 'Malicioso' }}</span>
             <i class="fa-solid fa-chevron-down antivirus-chevron"></i>
           </div>
         </div>
-        <div class="antivirus-detalle" *ngIf="antivirusExpandido === m.nombre">
-          <div class="detalle-fila"><span class="detalle-key">Antivirus</span><span class="detalle-val">{{ m.nombre }}</span></div>
-          <div class="detalle-fila"><span class="detalle-key">Categoría</span><span class="detalle-val">{{ getCategoryLabel(m.categoria) }}</span></div>
-          <div class="detalle-fila"><span class="detalle-key">Resultado</span><span class="detalle-val">{{ m.resultado || '—' }}</span></div>
+        <div class="antivirus-detalle" *ngIf="antivirusExpandido === m.engine_name">
+          <div class="detalle-fila"><span class="detalle-key">Antivirus</span><span
+            class="detalle-val">{{ m.engine_name }}</span></div>
+          <div class="detalle-fila"><span class="detalle-key">Categoría</span><span
+            class="detalle-val">{{ categoriaVirus }}</span></div>
+          <div class="detalle-fila"><span class="detalle-key">Resultado</span><span
+            class="detalle-val">{{ m.result || '—' }}</span></div>
         </div>
       </div>
     </div>
 
     <div *ngIf="sospechosos.length > 0">
-      <h3 class="grupo-titulo sospechoso"><i class="fa-solid fa-triangle-exclamation"></i> Sospechosos ({{ sospechosos.length }})</h3>
+      <h3 class="grupo-titulo sospechoso"><i class="fa-solid fa-triangle-exclamation"></i> Sospechosos
+        ({{ sospechosos.length }})</h3>
       <div class="antivirus-item" *ngFor="let m of sospechosos"
-           (click)="toggleAntivirus(m.nombre)" [class.expandido]="antivirusExpandido === m.nombre">
+           (click)="toggleAntivirus(m.engine_name), setCategoryLabel(m.category)" [class.expandido]="antivirusExpandido === m.engine_name">
         <div class="antivirus-header">
-          <span class="antivirus-nombre">{{ m.nombre }}</span>
+          <span class="antivirus-nombre">{{ m.engine_name }}</span>
           <div class="antivirus-derecha">
-            <span class="tag tag-sospechoso">{{ m.resultado || 'Sospechoso' }}</span>
+            <span class="tag tag-sospechoso">{{ m.result || 'Sospechoso' }}</span>
             <i class="fa-solid fa-chevron-down antivirus-chevron"></i>
           </div>
         </div>
-        <div class="antivirus-detalle" *ngIf="antivirusExpandido === m.nombre">
-          <div class="detalle-fila"><span class="detalle-key">Antivirus</span><span class="detalle-val">{{ m.nombre }}</span></div>
-          <div class="detalle-fila"><span class="detalle-key">Categoría</span><span class="detalle-val">{{ getCategoryLabel(m.categoria) }}</span></div>
-          <div class="detalle-fila"><span class="detalle-key">Resultado</span><span class="detalle-val">{{ m.resultado || '—' }}</span></div>
+        <div class="antivirus-detalle" *ngIf="antivirusExpandido === m.engine_name">
+          <div class="detalle-fila"><span class="detalle-key">Antivirus</span><span
+            class="detalle-val">{{ m.engine_name }}</span></div>
+          <div class="detalle-fila"><span class="detalle-key">Categoría</span><span
+            class="detalle-val">{{ categoriaVirus }}</span></div>
+          <div class="detalle-fila"><span class="detalle-key">Resultado</span><span
+            class="detalle-val">{{ m.result || '—' }}</span></div>
         </div>
       </div>
     </div>
@@ -135,59 +148,65 @@
 
   <div class="vista-contenido" *ngIf="vista === 'todos'">
     <div class="antivirus-item" *ngFor="let m of maliciosos"
-         (click)="toggleAntivirus(m.nombre)" [class.expandido]="antivirusExpandido === m.nombre">
+         (click)="toggleAntivirus(m.engine_name), setCategoryLabel(m.category)" [class.expandido]="antivirusExpandido === m.engine_name">
       <div class="antivirus-header">
-        <span class="antivirus-nombre">{{ m.nombre }}</span>
+        <span class="antivirus-nombre">{{ m.engine_name }}</span>
         <div class="antivirus-derecha">
           <span class="tag tag-malicioso">Malicioso</span>
           <i class="fa-solid fa-chevron-down antivirus-chevron"></i>
         </div>
       </div>
-      <div class="antivirus-detalle" *ngIf="antivirusExpandido === m.nombre">
-        <div class="detalle-fila"><span class="detalle-key">Resultado</span><span class="detalle-val">{{ m.resultado || '—' }}</span></div>
-        <div class="detalle-fila"><span class="detalle-key">Categoría</span><span class="detalle-val">{{ getCategoryLabel(m.categoria) }}</span></div>
+      <div class="antivirus-detalle" *ngIf="antivirusExpandido === m.engine_name">
+        <div class="detalle-fila"><span class="detalle-key">Resultado</span><span
+          class="detalle-val">{{ m.result || '—' }}</span></div>
+        <div class="detalle-fila"><span class="detalle-key">Categoría</span><span
+          class="detalle-val">{{ categoriaVirus }}</span></div>
       </div>
     </div>
     <div class="antivirus-item" *ngFor="let m of sospechosos"
-         (click)="toggleAntivirus(m.nombre)" [class.expandido]="antivirusExpandido === m.nombre">
+         (click)="toggleAntivirus(m.engine_name), setCategoryLabel(m.category)" [class.expandido]="antivirusExpandido === m.engine_name">
       <div class="antivirus-header">
-        <span class="antivirus-nombre">{{ m.nombre }}</span>
+        <span class="antivirus-nombre">{{ m.engine_name }}</span>
         <div class="antivirus-derecha">
           <span class="tag tag-sospechoso">Sospechoso</span>
           <i class="fa-solid fa-chevron-down antivirus-chevron"></i>
         </div>
       </div>
-      <div class="antivirus-detalle" *ngIf="antivirusExpandido === m.nombre">
-        <div class="detalle-fila"><span class="detalle-key">Resultado</span><span class="detalle-val">{{ m.resultado || '—' }}</span></div>
-        <div class="detalle-fila"><span class="detalle-key">Categoría</span><span class="detalle-val">{{ getCategoryLabel(m.categoria) }}</span></div>
+      <div class="antivirus-detalle" *ngIf="antivirusExpandido === m.engine_name">
+        <div class="detalle-fila"><span class="detalle-key">Resultado</span><span
+          class="detalle-val">{{ m.result || '—' }}</span></div>
+        <div class="detalle-fila"><span class="detalle-key">Categoría</span><span
+          class="detalle-val">{{ categoriaVirus }}</span></div>
       </div>
     </div>
     <div class="antivirus-item" *ngFor="let m of limpios"
-         (click)="toggleAntivirus(m.nombre)" [class.expandido]="antivirusExpandido === m.nombre">
+         (click)="toggleAntivirus(m.engine_name), setCategoryLabel(m.category)" [class.expandido]="antivirusExpandido === m.engine_name">
       <div class="antivirus-header">
-        <span class="antivirus-nombre">{{ m.nombre }}</span>
+        <span class="antivirus-nombre">{{ m.engine_name }}</span>
         <div class="antivirus-derecha">
           <span class="tag tag-limpio">Limpio</span>
           <i class="fa-solid fa-chevron-down antivirus-chevron"></i>
         </div>
       </div>
-      <div class="antivirus-detalle" *ngIf="antivirusExpandido === m.nombre">
+      <div class="antivirus-detalle" *ngIf="antivirusExpandido === m.engine_name">
         <div class="detalle-fila"><span class="detalle-key">Resultado</span><span class="detalle-val">—</span></div>
-        <div class="detalle-fila"><span class="detalle-key">Categoría</span><span class="detalle-val">{{ getCategoryLabel(m.categoria) }}</span></div>
+        <div class="detalle-fila"><span class="detalle-key">Categoría</span><span
+          class="detalle-val">{{ categoriaVirus }}</span></div>
       </div>
     </div>
     <div class="antivirus-item" *ngFor="let m of noDetectados"
-         (click)="toggleAntivirus(m.nombre)" [class.expandido]="antivirusExpandido === m.nombre">
+         (click)="toggleAntivirus(m.engine_name), setCategoryLabel(m.category)" [class.expandido]="antivirusExpandido === m.engine_name">
       <div class="antivirus-header">
-        <span class="antivirus-nombre">{{ m.nombre }}</span>
+        <span class="antivirus-nombre">{{ m.engine_name }}</span>
         <div class="antivirus-derecha">
           <span class="tag tag-nd">Sin datos</span>
           <i class="fa-solid fa-chevron-down antivirus-chevron"></i>
         </div>
       </div>
-      <div class="antivirus-detalle" *ngIf="antivirusExpandido === m.nombre">
+      <div class="antivirus-detalle" *ngIf="antivirusExpandido === m.engine_name">
         <div class="detalle-fila"><span class="detalle-key">Resultado</span><span class="detalle-val">—</span></div>
-        <div class="detalle-fila"><span class="detalle-key">Categoría</span><span class="detalle-val">{{ getCategoryLabel(m.categoria) }}</span></div>
+        <div class="detalle-fila"><span class="detalle-key">Categoría</span><span
+          class="detalle-val">{{ categoriaVirus }}</span></div>
       </div>
     </div>
   </div>

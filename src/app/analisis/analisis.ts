@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { VirusTotalUploadResponseModel } from '../models/virus-total-upload-response.model';
+import { EngineResultModel } from '../models/engine-result.model';
 
 @Component({
   selector: 'app-analisis',
@@ -9,45 +10,40 @@ import { VirusTotalUploadResponseModel } from '../models/virus-total-upload-resp
 })
 export class Analisis implements OnInit {
   @Input() analisis!: VirusTotalUploadResponseModel;
-  @Input() darkMode: boolean = true;
+  @Input() darkMode = true;
 
-  vista: string = 'resumen';
+  vista = 'resumen';
   antivirusExpandido: string | null = null;
 
-  maliciosos: any[] = [];
-  sospechosos: any[] = [];
-  limpios: any[] = [];
-  noDetectados: any[] = [];
+  maliciosos: EngineResultModel[] = [];
+  sospechosos: EngineResultModel[] = [];
+  limpios: EngineResultModel[] = [];
+  noDetectados: EngineResultModel[] = [];
 
-  totalAntivirus: number = 0;
+  totalAntivirus = 0;
+
+  categoriaVirus: string = '';
 
   ngOnInit() {
     const results = this.analisis.data.attributes.results;
-    const s = this.analisis.data.attributes.stats;
+    const statsTemp = this.analisis.data.attributes.stats;
 
     for (const nombre of Object.keys(results)) {
-      const e = results[nombre];
-      const entry = {
-        nombre: e.engine_name,
-        categoria: e.category,
-        resultado: e.result,
-      };
+      const entry = results[nombre];
 
-      if (e.category === 'malicious') {
+      if (entry.category === 'malicious') {
         this.maliciosos.push(entry);
-      }
-      else if (e.category === 'suspicious') {
+      } else if (entry.category === 'suspicious') {
         this.sospechosos.push(entry);
-      }
-      else if (e.category === 'harmless') {
+      } else if (entry.category === 'harmless') {
         this.limpios.push(entry);
-      }
-      else {
+      } else {
         this.noDetectados.push(entry);
       }
     }
 
-    this.totalAntivirus = s.malicious + s.suspicious + s.undetected + s.harmless;
+    this.totalAntivirus =
+      statsTemp.malicious + statsTemp.suspicious + statsTemp.undetected + statsTemp.harmless;
   }
 
   setVista(v: string) {
@@ -76,19 +72,18 @@ export class Analisis implements OnInit {
     return 'limpio';
   }
 
-  getCategoryLabel(categoria: string): string {
+  setCategoryLabel(categoria: string) {
     if (categoria === 'malicious') {
-      return 'Malicioso';
+      this.categoriaVirus = 'Malicioso';
     }
-
-    if (categoria === 'suspicious') {
-      return 'Sospechoso';
+    else if (categoria === 'suspicious') {
+      this.categoriaVirus = 'Sospechoso';
     }
-
-    if (categoria === 'harmless') {
-      return 'Limpio';
+    else if (categoria === 'harmless') {
+      this.categoriaVirus = 'Limpio';
     }
-
-    return 'Sin datos';
+    else {
+      this.categoriaVirus = 'Sin Datos';
+    }
   }
 }

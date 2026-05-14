@@ -30,7 +30,7 @@ export class CargaArchivo {
   id_analisis: string | null = null;
   nombre_archivo: string | null = null;
 
-  seccion: string = 'upload';
+  seccion = 'upload';
 
   analisis: VirusTotalUploadResponseModel | null = null;
 
