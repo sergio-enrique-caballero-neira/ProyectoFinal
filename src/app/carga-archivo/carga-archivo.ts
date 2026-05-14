@@ -66,9 +66,11 @@ export class CargaArchivo {
     }
   }
 
-  onFileSelected(event: any): void {
-    if (event.target.files.length) {
-      this.selectedFile = event.target.files[0];
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+
+    if (input.files?.length) {
+      this.selectedFile = input.files[0];
     }
   }
 
@@ -78,7 +80,8 @@ export class CargaArchivo {
 
   getFileSize(): string {
     if (!this.selectedFile) return '';
-    return (this.selectedFile.size / (1024 * 1024)).toFixed(2) + ' MB';
+
+    return `${(this.selectedFile.size / (1024 * 1024)).toFixed(2)} MB`;
   }
 
   logout() {
@@ -88,17 +91,19 @@ export class CargaArchivo {
   }
 
   subirArchivo() {
-    if (!this.selectedFile) return;
+    if (!this.selectedFile || !this.usuario) return;
 
     this.nombre_archivo = this.selectedFile.name;
 
     this.seccion = 'cargando';
 
-    this.usuarioService.getIdByUsername(this.usuario!).subscribe({
+    this.usuarioService.getIdByUsername(this.usuario).subscribe({
       next: (res) => {
         this.id_usuario = res.body;
 
-        this.virustotalService.postSubirArchivo(this.id_usuario!, this.selectedFile!).subscribe({
+        if (!this.id_usuario || !this.selectedFile) return;
+
+        this.virustotalService.postSubirArchivo(this.id_usuario, this.selectedFile).subscribe({
           next: (res) => {
             this.id_analisis = res;
             this.seccion = 'subido';
@@ -107,7 +112,7 @@ export class CargaArchivo {
           error: (err) => {
             console.log(err);
             this.seccion = 'upload';
-            this.cd.detectChanges()
+            this.cd.detectChanges();
           },
         });
       },

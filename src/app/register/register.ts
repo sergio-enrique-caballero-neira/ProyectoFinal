@@ -13,15 +13,15 @@ export class Register {
   private usuarioService = inject(UsuarioService);
   private cd = inject(ChangeDetectorRef);
 
-  nombre: string = '';
-  email: string = '';
-  telefono: string = '';
-  contrasena: string = '';
+  nombre = '';
+  email = '';
+  telefono = '';
+  contrasena = '';
 
-  registrando: boolean = false;
+  registrando = false;
 
-  mensajeError: string = '';
-  mensajeExito: string = '';
+  mensajeError = '';
+  mensajeExito = '';
   darkMode = true;
 
   ngOnInit() {
