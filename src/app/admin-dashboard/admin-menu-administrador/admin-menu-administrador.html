@@ -1,0 +1,13 @@
+<div class="contenedor" [class.light-mode]="!darkMode">
+  <h1>Administradores</h1>
+  <div class="boton">
+    <div>
+      <button type="button" class="btn crear" (click)="seleccionarMenu('crearAdministrador')">Crear</button>
+      <button type="button" class="btn mostrar" (click)="seleccionarMenu('mostrarAdministrador')">Mostrar</button>
+    </div>
+    <div>
+      <button type="button" class="btn eliminar" (click)="seleccionarMenu('eliminarAdministrador')">Eliminar</button>
+      <button type="button" class="btn actualizar" (click)="seleccionarMenu('actualizarAdministrador')">Actualizar</button>
+    </div>
+  </div>
+</div>

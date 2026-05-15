@@ -11,9 +11,22 @@ import { FormsModule } from '@angular/forms';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { authInterceptor } from './auth-interceptor';
 import { Analisis } from './analisis/analisis';
+import { AdminDashboard } from './admin-dashboard/admin-dashboard';
+import { AdminMenuUsuario } from './admin-dashboard/admin-menu-usuario/admin-menu-usuario';
+import { AdminMenuAdministrador } from './admin-dashboard/admin-menu-administrador/admin-menu-administrador';
 
 @NgModule({
-  declarations: [App, Login, AdminLogin, Register, CargaArchivo, Analisis],
+  declarations: [
+    App,
+    Login,
+    AdminLogin,
+    Register,
+    CargaArchivo,
+    Analisis,
+    AdminDashboard,
+    AdminMenuUsuario,
+    AdminMenuAdministrador,
+  ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [
     provideBrowserGlobalErrorListeners(),
