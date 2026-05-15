@@ -1,0 +1,24 @@
+<main class="main" [class.light-mode]="!darkMode">
+
+  <nav class="navbar fixed-top" [class.navbar-light-mode]="!darkMode">
+    <div class="container-fluid">
+      <a class="navbar-brand">Nombre de la pagina</a>
+      <div>
+        <button type="button" class="btn boton-salir" routerLink="/login">
+          <i class="fa-regular fa-circle-xmark"></i>
+        </button>
+        <button type="button" class="btn boton-color" (click)="toggleTheme()">
+          <i [class]="darkMode ? 'fa-solid fa-moon' : 'fa-solid fa-sun'"></i>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <div class="recuadro">
+    <app-admin-menu-usuario [darkMode]="darkMode"></app-admin-menu-usuario>
+  </div>
+
+  <div class="recuadro">
+   <app-admin-menu-administrador [darkMode]="darkMode" (cambiarMenu)="seleccionarMenu($event)"></app-admin-menu-administrador>
+  </div>
+</main>

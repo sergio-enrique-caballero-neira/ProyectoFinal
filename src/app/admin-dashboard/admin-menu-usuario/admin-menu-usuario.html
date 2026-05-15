@@ -1,0 +1,59 @@
+<div class="contenedor" [class.light-mode]="!darkMode">
+  <h1>Usuarios</h1>
+  <div class="boton">
+    <div>
+      <button type="button" class="btn crear" (click)="seleccionarMenu('crearUsuario')">Crear</button>
+      <button type="button" class="btn mostrar" (click)="seleccionarMenu('mostrarUsuario')">Mostrar</button>
+    </div>
+    <div>
+      <button type="button" class="btn eliminar" (click)="seleccionarMenu('eliminarUsuario')">Eliminar</button>
+      <button type="button" class="btn actualizar" (click)="seleccionarMenu('actualizarUsuario')">Actualizar</button>
+    </div>
+  </div>
+</div>
+
+<div class="crud-container">
+
+  <div *ngIf="menu === 'crearUsuario'">
+
+    <h2>CRUD Crear Usuario</h2>
+
+    <button (click)="menu = ''">
+      Volver
+    </button>
+
+  </div>
+
+  <div *ngIf="menu === 'mostrarUsuario'">
+
+    <h2>CRUD Mostrar Usuario</h2>
+
+    <button (click)="menu = ''">
+      Volver
+    </button>
+
+  </div>
+
+  <div *ngIf="menu === 'eliminarUsuario'">
+
+    <h2>CRUD Eliminar Usuario</h2>
+
+    <button (click)="menu = ''">
+      Volver
+    </button>
+
+  </div>
+
+  <div *ngIf="menu === 'actualizarUsuario'">
+
+    <h2>CRUD Actualizar Usuario</h2>
+
+    <button (click)="menu = ''">
+      Volver
+    </button>
+
+  </div>
+
+</div>
+
+
